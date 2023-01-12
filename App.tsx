@@ -3,13 +3,13 @@ import Card from "./components/Card";
 import Loading from "./components/Loading";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [item, setItem] = useState([]);
-  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState<any>(true);
+  const [item, setItem] = useState<any>([]);
+  const [page, setPage] = useState<any>(1);
 
-  const target = useRef(null);
+  const target = useRef<any>(null);
 
-  const dataLoader = async(page) => {
+  const dataLoader = async(page:any) => {
     return await fetch(
       `https://jsonplaceholder.typicode.com/posts?_limit=9&_page=${page}`
     )
@@ -18,14 +18,14 @@ const App = () => {
   };
 
   const createObserver = () => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver((entries:any) => {
+      entries.forEach((entry:any) => {
         if (entry.isIntersecting) {
           setLoading(true);
           dataLoader(page).then((newItem) => {
-            setItem((prev) => [...prev, ...newItem]);
+            setItem((prev:any) => [...prev, ...newItem]);
             setLoading(false);
-            setPage((prev) => prev+1);
+            setPage((prev:any) => prev+1);
           });
         }
       });
@@ -45,7 +45,7 @@ const App = () => {
         Infinite Scroll Machine Coding Round{" "}
       </p>
       <div className="flex gap-5 justify-center items-center flex-wrap">
-        {item.map((i, index) => (
+        {item.map((i:any, index:any) => (
           <Card
             key={index}
             id={i.id}
